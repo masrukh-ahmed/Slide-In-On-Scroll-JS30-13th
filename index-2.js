@@ -16,6 +16,7 @@ function debounce(func, wait = 10, immediate = true) {
 
 const sliderImages = Array.from(document.querySelectorAll(".img-container"));
 const slideInText = Array.from(document.querySelectorAll(".text"));
+const sec6Elements = Array.from(document.querySelectorAll(".sec-6 *"));
 
 function handleSlide(e) {
   sliderImages.forEach((image) => {
@@ -43,6 +44,20 @@ function handleSlide(e) {
       text.classList.add("active");
     } else {
       text.classList.remove("active");
+    }
+  });
+
+  sec6Elements.forEach((element) => {
+    const slideInAt =
+      window.scrollY + window.innerHeight - element.offsetHeight / 4;
+    const textBottomEdge = element.offsetTop + element.offsetHeight;
+    const isHalfShown = slideInAt > element.offsetTop;
+    const isNotScrolledPast = window.scrollY < textBottomEdge;
+
+    if (isHalfShown && isNotScrolledPast) {
+      element.classList.add("active");
+    } else {
+      element.classList.remove("active");
     }
   });
 }
